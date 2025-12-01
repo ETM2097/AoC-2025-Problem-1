@@ -12,7 +12,7 @@
 using namespace std;
 
 int main() {
-    ifstream inputFile("AoC1.txt");
+    ifstream inputFile("../AoC1.txt");
     if (!inputFile.is_open()) {
         cerr << "Error opening file" << endl;
         return 1;

@@ -11,8 +11,10 @@ AoC1
 |
 |--- Linked List
 |       |--- AoC1_Linked_List.cpp
+|       |--- AoC2_Linked_List.cpp
 |--- No Data Structure
         |--- AoC1_No_Data_Structure.cpp
+        |--- AoC2_No_Data_Structure.cpp
 ```
 
 ## No data structure implementation
@@ -38,6 +40,19 @@ The movements are processed using simple arithmetic to update the current positi
 Finally, the result is printed to the console:
 ```cpp
 cout << "Total visits to position 0: " << visitCount << endl;
+```
+### AoC2_No_Data_Structure.cpp
+This file contains a similar implementation to `AoC1_No_Data_Structure.cpp`, but it counts each time the dial points to 0 instead of how many times it ends atr position 0 after each movement.
+
+We implemented a change of logic in to count each time the dial points at the target position (0) during movements. This is done by checking how many full rotations the dial makes and finally calculating the remaining steps to see if it lands or crosses the target position (0).
+
+This is achieved by using the following logic:
+```cpp
+    laps = steps / 100;
+    zeroCount += laps;
+    int remaining = steps % 100;
+    if (remaining > 0 && remaining >= position && position > 0) zeroCount++;
+    position = ((position '<+ for R, - for L>' steps) % 100 + 100) % 100;
 ```
 
 ## Linked List implementation
@@ -79,6 +94,40 @@ Finally, the result is printed to the console:
 ```cpp
 cout << "Total visits to position 0: " << visitCount << endl;
 ```
+### AoC2_Linked_List.cpp
+This file contains a similar implementation to `AoC1_Linked_List.cpp`, but it counts each time the dial points to the target position (0) during movements instead of how many times it ends at the target position after each movement.
+
+We have added a `prev` pointer to the `Node` structure to facilitate backward traversal in the linked list. The `LinkedList` class has been updated accordingly to manage the `prev` pointers when adding nodes. The structure Node is now defined as follows:
+```cpp
+struct Node {
+    int position;
+    Node* next;
+    Node* prev;
+    Node(int pos) : position(pos), next(nullptr), prev(nullptr) {}
+};
+```
+The movements are processed by traversing the linked list according to the specified directions and steps, we check if the `actual` node's position is 0 after each step and increment the counter accordingly.
+
+The logic behind the list traversal and counting is as follows:
+```cpp
+    for (int step = 0; step < steps; step++) {
+        if (direction == 'R') {
+            temp = temp->next;
+        } else if (direction == 'L') {
+            temp = temp->prev;
+        }
+        if (temp->position == 0) {
+            zeroCount++;
+        }
+    }
+```
+As you can see, each time we are at position 0 during the traversal, we increment the `zeroCount` counter.
+
+Finally, the result is printed to the console:
+```cpp
+cout << "Total visits to position 0: " << zeroCount << endl;
+``` 
+
 
 ## Final Notes
 
