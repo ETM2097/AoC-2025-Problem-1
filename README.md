@@ -1,4 +1,4 @@
-# Implementations of Advent of code 2025 - Problem 1
+# Implementations of Advent of code 2025 - Day 1
 
 This folder contains different implementations for the first problem of Advent of Code 2025, which involves simulating a dial-like structure in order to find how many times a specific position is visited.
 
